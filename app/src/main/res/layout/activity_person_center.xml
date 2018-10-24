@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/parallax"
+        android:layout_width="match_parent"
+        android:layout_height="670dp"
+        android:layout_marginTop="-300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_bg"
+        app:layout_collapseMode="parallax" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePreviewInEditMode="false">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/collapse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentScrim="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:titleEnabled="false">
+
+                    <RelativeLayout
+                        android:id="@+id/panel_lyt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="200dp"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/panel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:background="#303030"
+                            android:paddingBottom="@dimen/padding_common_v"
+                            android:paddingLeft="@dimen/padding_common_h"
+                            android:paddingRight="@dimen/padding_common_h"
+                            android:paddingTop="@dimen/padding_common_v">
+
+                            <com.flyco.roundview.RoundTextView
+                                android:id="@+id/attention"
+                                style="@style/AppTheme.Label"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="0dp"
+                                android:paddingBottom="8dp"
+                                android:paddingLeft="25dp"
+                                android:paddingRight="25dp"
+                                android:paddingTop="8dp"
+                                android:text="添加课程"
+                                android:textColor="@color/colorPrimary"
+                                app:rv_backgroundColor="@android:color/white"
+                                app:rv_textPressColor="@android:color/white"
+                                app:rv_cornerRadius="3dp"
+                                app:rv_strokeColor="@color/colorPrimary"
+                                app:rv_strokeWidth="@dimen/division_line" />
+
+                            <com.flyco.roundview.RoundTextView
+                                android:id="@+id/detail"
+                                style="@style/AppTheme.Label"
+                                android:layout_marginLeft="@dimen/padding_common"
+                                android:layout_marginRight="@dimen/padding_common"
+                                android:layout_marginTop="0dp"
+                                android:layout_toLeftOf="@id/attention"
+                                android:layout_toStartOf="@id/attention"
+                                android:paddingBottom="8dp"
+                                android:paddingLeft="25dp"
+                                android:paddingRight="25dp"
+                                android:paddingTop="8dp"
+                                android:text="详情"
+                                android:textColor="@color/colorPrimary"
+                                app:rv_backgroundColor="@android:color/white"
+                                app:rv_cornerRadius="3dp"
+                                app:rv_strokeColor="@color/colorPrimary"
+                                app:rv_strokeWidth="@dimen/division_line"
+                                app:rv_textPressColor="@android:color/white" />
+
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/attention"
+                                android:text="一醉方休" />
+
+
+                            <TextView
+                                android:id="@+id/phone_num"
+                                style="@style/AppTheme.Label"
+                                android:layout_below="@id/name"
+                                android:layout_marginTop="@dimen/padding_common"
+                                android:textColor="#fff"
+                                android:text="电话：15236966658 " />
+
+
+                            <TextView
+                                android:id="@+id/study_course"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/phone_num"
+                                android:layout_marginTop="@dimen/padding_common"
+                                android:text="学习课程：声乐，吉他..."
+                                android:textColor="@color/colorTextAssistant" />
+
+                        </RelativeLayout>
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/img"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="@dimen/padding_common"
+                            android:layout_marginStart="@dimen/padding_common"
+                            android:src="@drawable/image_head"
+                            app:civ_border_color="@android:color/white"
+                            app:civ_border_overlay="true"
+                            app:civ_border_width="3dp" />
+
+                        <TextView
+                            android:id="@+id/course_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:background="?attr/selectableItemBackground"
+                            android:shadowColor="#aa000000"
+                            android:shadowDx="2.5"
+                            android:shadowDy="2.5"
+                            android:shadowRadius="10"
+                            android:text="剩余总课时充足"
+                            android:textColor="@android:color/white" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true" />
+                    </RelativeLayout>
+
+                </android.support.design.widget.CollapsingToolbarLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:background="#303030"
+                    android:layout_width="match_parent"
+                    android:minHeight="500dp"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppTheme.Toolbar"
+        android:layout_marginBottom="0dp"
+        android:background="@android:color/transparent"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="?attr/homeAsUpIndicator">
+
+        <android.support.v7.widget.ButtonBarLayout
+            android:id="@+id/buttonBarLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/title_img"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="@dimen/padding_common_d"
+                android:layout_marginRight="@dimen/padding_common_d"
+                android:src="@drawable/image_head"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_overlay="true"
+                app:civ_border_width="@dimen/division_line" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="一醉方休"
+                android:textSize="16sp" />
+        </android.support.v7.widget.ButtonBarLayout>
+    </android.support.v7.widget.Toolbar>
+</FrameLayout>

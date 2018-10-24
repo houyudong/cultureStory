@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#303030</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#303030</color>
+    <color name="white">#fff</color>
+    <color name="userinfor_color">#ddd</color>
+    <color name="colorTextTitle">#333333</color>
+    <color name="colorTextContent">#444444</color>
+    <color name="colorTextAssistant">#888888</color>
+    <color name="sport_word_color">#69A2D5</color>
+    <color name="gray">#666</color>
+    <color name="black">#000</color>
+</resources>

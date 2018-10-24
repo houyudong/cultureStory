@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ciyun_actionbar"
+    android:layout_width="fill_parent"
+    android:layout_height="48dip"
+    android:background="@drawable/group_bottom_line_bg"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/btn_title_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_selector_title_back"
+        android:maxHeight="40dip" />
+
+
+
+    <TextView
+        android:id="@+id/btn_title_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:maxHeight="40dip"
+        android:textColor="#666"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/btn_title_right2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/btn_title_right"
+        android:clickable="true"
+        android:gravity="center"
+        android:maxHeight="20dip"
+        android:textColor="#666"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/text_title_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:maxWidth="200dp"
+        android:singleLine="true"
+        android:textColor="#333"
+        android:textSize="17sp" />
+
+</RelativeLayout>

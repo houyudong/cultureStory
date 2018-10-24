@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/picker_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#eee"
+        android:dividerHeight="0.5dp"
+        android:background="@color/white" >
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="bottom"
+        android:background="#eee"
+        android:layout_height="55dp">
+        <Button
+            android:id="@+id/picker_cancel_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:background="@drawable/white_btn_bg"
+            android:textColor="#000000"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="取    消" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">故事汇</string>
+    <string name="label_hour">时</string>
+    <string name="label_minute">分</string>
+    <string name="label_year">年</string>
+    <string name="label_month">月</string>
+    <string name="label_day">日</string>
+    <string name="select_time">请选择时间</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="permission_tips">如果您拒绝授权，一些功能将无法使用，请在设置中打开权限</string>
+    <string name="memory_card_not_exist">内存卡不存在</string>
+    <string name="select_image_error">选择图片文件出错</string>
+    <string name="select_image_not_right">选择图片文件不正确</string>
+
+</resources>

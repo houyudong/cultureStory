@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.Toolbar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize" />
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/image_bg" />
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/smartRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#303030"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginTop="10dip"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:text="课程科目"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/course_name"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center"
+                            android:paddingBottom="5dp"
+                            android:paddingRight="20dip"
+                            android:paddingTop="5dp"
+                            android:singleLine="true"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:text="课程学时"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+                        <EditText
+                            android:id="@+id/course_time"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="end|center"
+                            android:inputType="number"
+                            android:maxLength="20"
+                            android:paddingRight="20dip"
+                            android:singleLine="true"
+                            android:textColor="@color/userinfor_color"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:text="授课老师"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+                        <EditText
+                            android:id="@+id/teacher"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="end|center"
+                            android:inputType="text"
+                            android:maxLength="20"
+                            android:paddingRight="20dip"
+                            android:singleLine="true"
+                            android:textColor="@color/userinfor_color"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginTop="10dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:layout_marginStart="20dip"
+                            android:text="课程原价"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+
+                        <EditText
+                            android:id="@+id/course_price"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="end|center"
+                            android:inputType="number"
+                            android:maxLength="20"
+                            android:paddingRight="20dip"
+                            android:singleLine="true"
+                            android:textColor="@color/userinfor_color"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:layout_marginStart="20dip"
+                            android:text="活动价格"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+
+                        <EditText
+                            android:id="@+id/course_activity_price"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="end|center"
+                            android:inputType="number"
+                            android:maxLength="20"
+                            android:paddingRight="20dip"
+                            android:singleLine="true"
+                            android:textColor="@color/userinfor_color"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:text="支付价格"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+
+                        <EditText
+                            android:id="@+id/pay_price"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:gravity="right|center"
+                            android:paddingRight="20dip"
+                            android:singleLine="true"
+                            android:textColor="@color/userinfor_color"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:layout_gravity="left|center_vertical"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:text="报名时间"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/start_time"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center"
+                            android:paddingBottom="5dp"
+                            android:paddingRight="20dip"
+                            android:paddingTop="5dp"
+                            android:singleLine="true"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:layout_gravity="left|center_vertical"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:text="结束时间"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/end_time"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center"
+                            android:paddingBottom="5dp"
+                            android:paddingRight="20dip"
+                            android:paddingTop="5dp"
+                            android:singleLine="true"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:layout_gravity="left|center_vertical"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:text="类型"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/type"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center"
+                            android:paddingBottom="5dp"
+                            android:paddingRight="20dip"
+                            android:paddingTop="5dp"
+                            android:singleLine="true"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:layout_gravity="left|center_vertical"
+                        android:background="@drawable/selector_person_common"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginLeft="20dip"
+                            android:text="备忘录"
+                            android:textColor="#fff"
+                            android:textSize="15dp" />
+
+                        <EditText
+                            android:id="@+id/memo"
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center"
+                            android:paddingBottom="5dp"
+                            android:paddingRight="20dip"
+                            android:paddingTop="5dp"
+                            android:singleLine="true"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </FrameLayout>
+</LinearLayout>

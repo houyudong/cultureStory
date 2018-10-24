@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+    <com.github.gcacace.signaturepad.views.SignaturePad
+        android:id="@+id/signature_pad"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        app:penColor="@android:color/black"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/del"
+            style="@style/AppTheme.Label"
+            android:paddingBottom="8dp"        android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:text="清除"
+            android:textColor="@color/colorPrimary"
+            app:rv_backgroundColor="@android:color/white"
+            app:rv_cornerRadius="3dp"
+            app:rv_strokeColor="@color/colorPrimary"
+            app:rv_strokeWidth="@dimen/division_line"
+            app:rv_textPressColor="@android:color/white" />
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/save"
+            style="@style/AppTheme.Label"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="8dp"
+            android:text="保存"
+            android:textColor="@color/colorPrimary"
+            app:rv_backgroundColor="@android:color/white"
+            app:rv_cornerRadius="3dp"
+            app:rv_strokeColor="@color/colorPrimary"
+            app:rv_strokeWidth="@dimen/division_line"
+            app:rv_textPressColor="@android:color/white" />
+    </LinearLayout>
+</LinearLayout>

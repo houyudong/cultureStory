@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/item_listpicker_margin"
+    android:background="@drawable/white_btn_bg"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/listviewpicker_item_icon"
+        android:layout_width="@dimen/item_listpicker_imageview_height"
+        android:layout_height="@dimen/item_listpicker_imageview_height"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/item_listpicker_imageview_margin"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/listviewpicker_item_text"
+        android:layout_width="0dip"
+        android:layout_height="@dimen/item_listpicker_textview_height"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:paddingLeft="@dimen/item_listpicker_textview_padding"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/sport_word_color" />
+
+</LinearLayout>

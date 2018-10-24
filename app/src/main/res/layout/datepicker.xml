@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/view_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:padding="10dip" >
+
+        <Button
+            android:id="@+id/numberpicker_cancle"
+            android:layout_width="50dip"
+            android:layout_height="35dip"
+            android:background="@null"
+            android:text="取消"
+            android:textColor="#333"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/numberpicker_title"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#333"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/numberpicker_done"
+            android:layout_width="50dip"
+            android:layout_height="35dip"
+            android:background="@null"
+            android:text="保存"
+            android:textColor="@color/textview_selector"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="#e9e9e9" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="horizontal" >
+
+        <com.story.culture.views.WheelView
+            android:id="@+id/wheelview_year"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white" >
+        </com.story.culture.views.WheelView>
+
+        <com.story.culture.views.WheelView
+            android:id="@+id/wheelview_month"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white" >
+        </com.story.culture.views.WheelView>
+
+        <com.story.culture.views.WheelView
+            android:id="@+id/wheelview_day"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white" >
+        </com.story.culture.views.WheelView>
+    </LinearLayout>
+
+</LinearLayout>
