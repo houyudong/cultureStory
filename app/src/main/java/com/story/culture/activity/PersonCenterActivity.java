@@ -1,8 +1,13 @@
 package com.story.culture.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,10 +15,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.VideoView;
 import com.flyco.roundview.RoundTextView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
@@ -26,16 +30,16 @@ import com.story.culture.basecomon.BaseRecyclerViewAdapter;
 import com.story.culture.database.CourseInfo;
 import com.story.culture.database.DbOperator;
 import com.story.culture.database.StudentInfo;
-import com.story.utils.Excel1Util;
+import com.story.culture.views.ListViewPicker;
 import com.story.utils.StatusBarUtil;
-
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-
 public class PersonCenterActivity extends BaseActivity implements BaseRecyclerViewAdapter.OnItemClickListener, View.OnClickListener {
 
     private int mOffset = 0;
@@ -48,8 +52,8 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
             CircleImageView title_img;
     @Bind(R.id.img)//头像
             CircleImageView img;
-    @Bind(R.id.parallax)//背景
-            ImageView parallax;
+//    @Bind(R.id.parallax)//背景
+//            ImageView parallax;
     @Bind(R.id.phone_num)//电话
             TextView phone_num;
     @Bind(R.id.study_course)//学习课程科目
@@ -64,6 +68,8 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
             RecyclerView recyclerView;
     @Bind(R.id.refreshLayout)
     SmartRefreshLayout smartRefreshLayout;
+    @Bind(R.id.videoView)
+    VideoView videoView;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.scrollView)
@@ -118,7 +124,7 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
         //状态栏透明和间距处理
         StatusBarUtil.immersive(this);
         StatusBarUtil.setPaddingSmart(this, toolbar);
-        final View parallax = findViewById(R.id.parallax);
+//        final View parallax = findViewById(R.id.parallax);
         final View buttonBar = findViewById(R.id.buttonBarLayout);
         smartRefreshLayout.setEnableRefresh(false);
         smartRefreshLayout.setEnableAutoLoadMore(false);
@@ -128,14 +134,14 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
             @Override
             public void onHeaderPulling(RefreshHeader header, float percent, int offset, int bottomHeight, int extendHeight) {
                 mOffset = offset / 2;
-                parallax.setTranslationY(mOffset - mScrollY);
+                videoView.setTranslationY(mOffset - mScrollY);
                 toolbar.setAlpha(1 - Math.min(percent, 1));
             }
 
             @Override
             public void onHeaderReleasing(RefreshHeader header, float percent, int offset, int bottomHeight, int extendHeight) {
                 mOffset = offset / 2;
-                parallax.setTranslationY(mOffset - mScrollY);
+                videoView.setTranslationY(mOffset - mScrollY);
                 toolbar.setAlpha(1 - Math.min(percent, 1));
             }
         });
@@ -151,13 +157,14 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
                     mScrollY = scrollY > h ? h : scrollY;
                     buttonBar.setAlpha(1f * mScrollY / h);
                     toolbar.setBackgroundColor(((255 * mScrollY / h) << 24) | color);
-                    parallax.setTranslationY(mOffset - mScrollY);
+                    videoView.setTranslationY(mOffset - mScrollY);
                 }
                 lastScrollY = scrollY;
             }
         });
         buttonBar.setAlpha(0);
         toolbar.setBackgroundColor(0);
+
 
     }
 
@@ -175,6 +182,7 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
                 break;
             case R.id.detail:
                 WriteInfoActivity.action2WriteInfoActivity(this, info, true);
+                selectVideo();
                 break;
 //                case R.id.import_excel:
 //                    //学员课程表导出
@@ -184,6 +192,81 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
 //                    String courseInfoFileds[] = new String[]{"id", "course_name", "course_state", "course_class_hour", "available_class_hour", "course_price", "course_sale", "course_actual_price", "type", "teacher", "date", "phone_number", "memo"};// 设置列英文名
 //                    Excel1Util.writeExcel("ceshi.xls", courseInfos, courseInfoTitles, courseInfoColumnLength, courseInfoFileds);
 //                break;
+        }
+    }
+    Uri   fileUri;
+    private void selectVideo() {
+        final ListViewPicker picker = new ListViewPicker(new String[]{"录制视频", "从图库选取"}, this);
+        picker.setCancelListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picker.dismiss();
+            }
+        });
+        picker.setOnSelectListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> listView, View listItemView, int position, long id) {
+                if (position == 0) {
+                    Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                    try {
+                        fileUri = Uri.fromFile(createMediaFile()); // create a file to save the video
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);  // set the image file name
+                    intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // set the video image quality to high
+                    startActivityForResult(intent, 222);
+                } else {
+                    Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, 111);
+                }
+                picker.dismiss();
+            }
+        });
+        picker.show();
+    }
+    private File createMediaFile() throws IOException {
+            File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_MOVIES), "CameraDemo");
+            if (!mediaStorageDir.exists()) {
+                if (!mediaStorageDir.mkdirs()) {
+                    return null;
+                }
+            }
+            // Create an image file name
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "VID_" + timeStamp;
+            String suffix = ".mp4";
+            File mediaFile = new File(mediaStorageDir + File.separator + imageFileName + suffix);
+            return mediaFile;
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 222 && resultCode == RESULT_OK && null != data) {
+            videoView.setVideoPath(fileUri.getPath());
+            if (videoView.getCurrentPosition() >= videoView.getDuration()) {
+                videoView.seekTo(0);
+            }
+            videoView.start();
+        }
+        if (requestCode == 111 && resultCode == RESULT_OK && null != data) {
+            Uri selectedVideo = data.getData();
+            String[] filePathColumn = {MediaStore.Video.Media.DATA};
+
+            Cursor cursor = getContentResolver().query(selectedVideo,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String videoPath = cursor.getString(columnIndex);
+            videoView.setVideoPath(videoPath);
+            if (videoView.getCurrentPosition() >= videoView.getDuration()) {
+                videoView.seekTo(0);
+            }
+            videoView.start();
+            cursor.close();
         }
     }
 

@@ -7,7 +7,7 @@ android {
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         applicationId "com.story.culture"
         minSdkVersion 21
-        targetSdkVersion 23
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -43,6 +43,4 @@ dependencies {
     implementation 'com.github.gcacace:signature-pad:1.2.1'
     //    compileOnly files('C:/Program Files/Java/jdk1.8.0_66/jre/lib/rt.jar')
     implementation files('libs/jxl.jar')
-    implementation project(':vitamio')
 }
-

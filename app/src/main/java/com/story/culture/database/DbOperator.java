@@ -4,7 +4,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.xutil.Singlton;
 
+import com.story.utils.DateUtils;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @Description 数据库操作类，在此类写数据库逻辑
@@ -35,6 +38,14 @@ public class DbOperator extends DbHelper {
         String tableName = DbHelper.STUDENT_INFO_TABLE;
         return getStudentInfo("select * from " + tableName + " where student_name = '" + name+ "' ");
     }
+    /**
+     * 根据重点关注查询学生信息
+     * @return
+     */
+    public ArrayList<StudentInfo> getSutdentByAttention() {
+        String tableName = DbHelper.STUDENT_INFO_TABLE;
+        return getStudentInfo("select * from " + tableName + " where attention = '" + true+ "' ");
+    }
 
     /**
      * 根据手机查询学生信息
@@ -63,7 +74,40 @@ public class DbOperator extends DbHelper {
     public ArrayList<StudentInfo> getAllSutdent() {
         String tableName = DbHelper.STUDENT_INFO_TABLE;
         return getStudentInfo("select * from " + tableName);
+    }   
+    /**
+     * 查询课程即将结束的学生信息
+     * @return
+     */
+    public ArrayList<StudentInfo> querySutdent() {
+        String tableName = DbHelper.STUDENT_INFO_TABLE;
+        ArrayList<StudentInfo> studentInfos = new ArrayList<>();
+        ArrayList<StudentInfo> infos = getStudentInfo("select * from " + tableName);
+        for (StudentInfo info : infos) {
+            ArrayList<CourseInfo> courseInfos = getCourseById(info.id);
+            for (CourseInfo courseInfo : courseInfos) {
+               if (isNeedsToBuyCourse(courseInfo)){
+                   studentInfos.add(info);
+                   break;
+               }
+            }
+        }
+        return studentInfos;
     }
+
+    private boolean isNeedsToBuyCourse(CourseInfo courseInfo) {
+       if(courseInfo.type.equals("按次")){
+         return  Integer.valueOf(courseInfo.available_class_hour) <=3;
+       }else{
+       int days=    DateUtils.differentDays(new Date(),new Date(courseInfo.overdue_date));
+       if(days>0 && days > 15){
+           return false;
+       }
+           return true;
+       }
+    }
+
+
     private ArrayList<StudentInfo> getStudentInfo(String query) {
         mSQLiteDatabase = getWritableDatabase();
 
@@ -412,4 +456,18 @@ private static CourseInfo getCourseInfo(Cursor localCursor) {
         return 1;
     }
 
+    /**
+     * 查询学员是否需要续费
+     * @param id
+     * @return true 需要续费 false 不需要续费
+     */
+    public boolean querySutdent(int id) {
+            ArrayList<CourseInfo> courseInfos = getCourseById(id);
+            for (CourseInfo courseInfo : courseInfos) {
+                if (isNeedsToBuyCourse(courseInfo)){
+                   return true;
+                }
+            }
+        return false;
+    }
 }

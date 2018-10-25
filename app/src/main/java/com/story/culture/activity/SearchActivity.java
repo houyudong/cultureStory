@@ -18,6 +18,7 @@ import com.githang.statusbar.StatusBarCompat;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.story.culture.R;
 import com.story.culture.adapter.StudentInfoAdapter;
+import com.story.culture.basecomon.BaseActivity;
 import com.story.culture.basecomon.BaseRecyclerViewAdapter;
 import com.story.culture.database.DbOperator;
 import com.story.culture.database.StudentInfo;
@@ -28,7 +29,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity implements BaseRecyclerViewAdapter.OnItemClickListener {
+public class SearchActivity extends BaseActivity implements BaseRecyclerViewAdapter.OnItemClickListener {
     private int type = 1;//1是姓名2是电话3是课程，默认是姓名
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -73,7 +74,7 @@ public class SearchActivity extends AppCompatActivity implements BaseRecyclerVie
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
-        searchView.setQueryHint("可输入姓名,电话,课程");
+        searchView.setQueryHint("可输入姓名,电话");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -107,8 +108,9 @@ public class SearchActivity extends AppCompatActivity implements BaseRecyclerVie
         switch (id) {
             case android.R.id.home:
                 this.finish();
-            case R.id.function_course:
-                type = 3;
+            case R.id.function_attentiosn:
+                List<StudentInfo> list =  DbOperator.getInstance().getSutdentByAttention();
+                adapter.refresh(list);
                 break;
             case R.id.function_phone:
                 type = 2;

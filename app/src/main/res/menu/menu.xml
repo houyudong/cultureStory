@@ -9,8 +9,8 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/function_course"
-        android:title="根据课程搜索"
+        android:id="@+id/function_attentiosn"
+        android:title="重点关注查询"
         app:actionViewClass="android.support.v7.widget.SearchView"
      />
     <item
