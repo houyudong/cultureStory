@@ -43,5 +43,6 @@ dependencies {
     implementation 'com.github.gcacace:signature-pad:1.2.1'
     //    compileOnly files('C:/Program Files/Java/jdk1.8.0_66/jre/lib/rt.jar')
     implementation files('libs/jxl.jar')
+    implementation project(':vitamio')
 }
 
