@@ -13,9 +13,14 @@ import android.view.View;
 import com.githang.statusbar.StatusBarCompat;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.story.culture.R;
+import com.story.culture.adapter.OnMultiClickListener;
 import com.story.culture.adapter.StudentInfoAdapter;
 import com.story.culture.basecomon.BaseActivity;
 import com.story.culture.basecomon.BaseRecyclerViewAdapter;
+import com.story.culture.database.DbOperator;
+import com.story.culture.database.StudentInfo;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,13 +53,18 @@ public class SearchNeedsToBuyActivity extends BaseActivity implements BaseRecycl
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("学员查询");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        toolbar.setNavigationOnClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ArrayList<StudentInfo> list = DbOperator.getInstance().getAllSutdent();
+        ArrayList<StudentInfo> list = DbOperator.getInstance().querySutdent();
         adapter.refresh(list);
     }
 

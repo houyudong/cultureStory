@@ -68,9 +68,9 @@ public class StudentInfoAdapter extends BaseRecyclerViewAdapter<StudentInfo, Bas
             viewHoder.getTextView(R.id.course).setText("入学时间" + item.startDate);
 //            viewHoder.getTextView(R.id.class_hour).setText(item.studentName);
             if (DbOperator.getInstance().querySutdent(item.id)) {
-                viewHoder.getImageView(R.id.sex_img).setVisibility(View.VISIBLE);
+                viewHoder.getImageView(R.id.warn).setVisibility(View.VISIBLE);
             } else {
-                viewHoder.getImageView(R.id.sex_img).setVisibility(View.INVISIBLE);
+                viewHoder.getImageView(R.id.warn).setVisibility(View.INVISIBLE);
             }
         }
 

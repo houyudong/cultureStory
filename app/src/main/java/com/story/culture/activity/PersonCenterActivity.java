@@ -1,6 +1,5 @@
 package com.story.culture.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,10 +9,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -31,12 +33,15 @@ import com.story.culture.database.CourseInfo;
 import com.story.culture.database.DbOperator;
 import com.story.culture.database.StudentInfo;
 import com.story.culture.views.ListViewPicker;
+import com.story.utils.Excel1Util;
 import com.story.utils.StatusBarUtil;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -73,7 +78,8 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.scrollView)
-    NestedScrollView scrollView;
+    NestedScrollView scrollView;    @Bind(R.id.buttonBarLayout)
+    ButtonBarLayout buttonBar;
     private CourseInfoAdapter adapter;
     private StudentInfo info;
     private ArrayList<CourseInfo> list;
@@ -115,6 +121,9 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
         adapter.setOnItemClickListener(this);
         detail.setOnClickListener(this);
         attention.setOnClickListener(this);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("");
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +134,6 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
         StatusBarUtil.immersive(this);
         StatusBarUtil.setPaddingSmart(this, toolbar);
 //        final View parallax = findViewById(R.id.parallax);
-        final View buttonBar = findViewById(R.id.buttonBarLayout);
         smartRefreshLayout.setEnableRefresh(false);
         smartRefreshLayout.setEnableAutoLoadMore(false);
 //        List<CourseInfo> list = DbOperator.getInstance().getCourseByPhone(info.studentPhonenumber);
@@ -169,6 +177,35 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.upload:
+                selectVideo();
+                break;
+            case R.id.modify:
+                this.finish();
+                break;
+            case R.id.importExcel:
+                //学员课程表导出
+                    List<CourseInfo> courseInfos =  DbOperator.getInstance().getCourseById(1);
+                    String[] courseInfoTitles = new String[]{"id", "课程名字", "课程状态", "课程总学时", "可用课程学时", "课程金额原价", "课程金额优惠价格", "课程金额实际支付价格", "类型", "授课老师", "报名时间", "学生电话", "备忘录"};// 设置列中文名
+                    int courseInfoColumnLength[] = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10,10};// 设置列宽
+                    String courseInfoFileds[] = new String[]{"id", "course_name", "course_state", "course_class_hour", "available_class_hour", "course_price", "course_sale", "course_actual_price", "type", "teacher", "date", "phone_number", "memo"};// 设置列英文名
+                    Excel1Util.writeExcel("ceshi.xls", courseInfos, courseInfoTitles, courseInfoColumnLength, courseInfoFileds);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_personalcenter, menu);//加载menu文件到布局
+
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
     public void onItemClick(View view, int position) {
         CourseDetailActivity.action2CourseDetailActivity(this, info,adapter.getItem(position));
     }
@@ -182,15 +219,10 @@ public class PersonCenterActivity extends BaseActivity implements BaseRecyclerVi
                 break;
             case R.id.detail:
                 WriteInfoActivity.action2WriteInfoActivity(this, info, true);
-                selectVideo();
+
                 break;
 //                case R.id.import_excel:
-//                    //学员课程表导出
-//                    List<CourseInfo> courseInfos =  DbOperator.getInstance().getCourseById(1);
-//                    String[] courseInfoTitles = new String[]{"id", "课程名字", "课程状态", "课程总学时", "可用课程学时", "课程金额原价", "课程金额优惠价格", "课程金额实际支付价格", "类型", "授课老师", "报名时间", "学生电话", "备忘录"};// 设置列中文名
-//                    int courseInfoColumnLength[] = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10,10};// 设置列宽
-//                    String courseInfoFileds[] = new String[]{"id", "course_name", "course_state", "course_class_hour", "available_class_hour", "course_price", "course_sale", "course_actual_price", "type", "teacher", "date", "phone_number", "memo"};// 设置列英文名
-//                    Excel1Util.writeExcel("ceshi.xls", courseInfos, courseInfoTitles, courseInfoColumnLength, courseInfoFileds);
+//
 //                break;
         }
     }

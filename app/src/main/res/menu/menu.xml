@@ -11,16 +11,13 @@
     <item
         android:id="@+id/function_attentiosn"
         android:title="重点关注查询"
-        app:actionViewClass="android.support.v7.widget.SearchView"
      />
     <item
         android:id="@+id/function_phone"
         android:title="根据电话搜索"
-        app:actionViewClass="android.support.v7.widget.SearchView"
         />
     <item
         android:id="@+id/function_name"
         android:title="根据姓名搜索"
-        app:actionViewClass="android.support.v7.widget.SearchView"
        />
 </menu>

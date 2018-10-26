@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.pay_price:
                 break;
             case R.id.attention:
-
+SearchNeedsToBuyActivity.action2SearchNeedsToBuyActivity(this);
                 break;
             case R.id.query:
                 SearchActivity.action2SearchActivity(this);
