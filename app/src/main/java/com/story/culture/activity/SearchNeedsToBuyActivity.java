@@ -24,7 +24,11 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
+/**
+ * @Description: 续费用户查询
+ * @Copyright  2018 中金慈云健康科技有限公司
+ * @Created by 侯玉东 on 2018/12/12 0012 上午 9:52
+ */
 public class SearchNeedsToBuyActivity extends BaseActivity implements BaseRecyclerViewAdapter.OnItemClickListener {
     @Bind(R.id.smartRefreshLayout)
     SmartRefreshLayout smartRefreshLayout;
@@ -51,7 +55,7 @@ public class SearchNeedsToBuyActivity extends BaseActivity implements BaseRecycl
         adapter.setOnItemClickListener(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("学员查询");
+        getSupportActionBar().setTitle("续费查询");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new OnMultiClickListener() {
             @Override

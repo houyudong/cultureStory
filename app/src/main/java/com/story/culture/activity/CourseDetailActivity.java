@@ -2,6 +2,7 @@ package com.story.culture.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,18 +10,24 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.flyco.roundview.RoundTextView;
+import com.github.gcacace.signaturepad.utils.SvgBuilder;
+import com.github.gcacace.signaturepad.utils.SvgPathBuilder;
 import com.story.culture.R;
 import com.story.culture.adapter.UseCourseInfoAdapter;
 import com.story.culture.basecomon.BaseActivity;
+import com.story.culture.database.ConsumeClassTimeInfo;
 import com.story.culture.database.CourseInfo;
+import com.story.culture.database.DbOperator;
 import com.story.culture.database.StudentInfo;
 import com.story.culture.views.RoundAngleImageView;
 import com.story.culture.views.middleScrollView.ContentRecyclerView;
@@ -35,10 +42,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class CourseDetailActivity extends BaseActivity implements View.OnClickListener {
-    @Bind(R.id.recyclerView)
-    ContentRecyclerView recyclerView;
-    @Bind(R.id.scroll_down_layout)
-    ScrollLayout mScrollLayout;
     @Bind(R.id.card)
     FrameLayout card;
     @Bind(R.id.scrollView)
@@ -58,7 +61,8 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.memo)
     EditText memo;
     @Bind(R.id.sign)
-    RoundTextView sign;
+    LinearLayout sign;    @Bind(R.id.save)
+    RoundTextView save;
 
     @Bind(R.id.course_name)
     TextView course_name;
@@ -79,14 +83,13 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.course_price)
     TextView course_price;
     @Bind(R.id.finish)
-    ImageView finish;
-
-    private boolean isScroll;
-    private UseCourseInfoAdapter adapter;
+    ImageView finish;    @Bind(R.id.sign_img)
+    ImageView sign_img;
     private StudentInfo mStudentInfo;
     private CourseInfo mCourseInfo;
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat dateTimeformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private String path;
 
     private void initData() {
         String strBeginDate = dateTimeformat.format(new Date());
@@ -135,7 +138,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("个人资料");
+        getSupportActionBar().setTitle(mCourseInfo.course_name);
         initView();
     }
 
@@ -145,83 +148,39 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         initData();
     }
 
-    private ScrollLayout.OnScrollChangedListener mOnScrollChangedListener = new ScrollLayout.OnScrollChangedListener() {
-        @Override
-        public void onScrollProgressChanged(float currentProgress) {
-        }
-
-        @Override
-        public void onScrollFinished(final ScrollLayout.Status currentStatus) {
-            if (currentStatus.equals(ScrollLayout.Status.EXIT)) {
-                isScroll = true;
-            } else if (currentStatus.equals(ScrollLayout.Status.OPENED)) {
-                scrollView.fullScroll(ScrollView.FOCUS_UP);
-                isScroll = false;
-            } else {
-                isScroll = false;
-            }
-            adapter.notifyDataSetChanged();
-        }
-
-        @Override
-        public void onChildScroll(int top) {
-        }
-    };
-
     private void initView() {
-//        scrollView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                if (isScroll) {
-//                    return false;
-//                }
-//                return true;
-//            }
-//        });
         sign.setOnClickListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        adapter = new UseCourseInfoAdapter(this);
-        recyclerView.setAdapter(adapter);
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        float mScreenWidth = dm.widthPixels;// 获取屏幕分辨率宽度
-        float mScreenHeight = dm.heightPixels;// 获取屏幕分辨率高度
-        float ratio = mScreenHeight / mScreenWidth;
-        if (ratio > 1.9) {//全面屏手机
-            mScrollLayout.setMaxOffset((int) (ScreenUtils.getScreenHeight(this) * 0.74));
-            if (mScreenHeight > 2240) {
-                mScrollLayout.setExitOffset((int) (ScreenUtils.getScreenHeight(this) * 0.12));
-            }
-            if (mScreenHeight < 2180) {
-                mScrollLayout.setExitOffset((int) (ScreenUtils.getScreenHeight(this) * 0.08));
-            }
-        } else {
-            mScrollLayout.setMaxOffset((int) (ScreenUtils.getScreenHeight(this) * 0.7));
-            mScrollLayout.setExitOffset(DensityUtil.dip2px(this, 100));
-        }
-
-        /**设置 setting*/
-        mScrollLayout.setMinOffset(0);
-        mScrollLayout.setIsSupportExit(true);
-        mScrollLayout.setAllowHorizontalScroll(true);
-//        mScrollLayout.setOnScrollChangedListener(mOnScrollChangedListener);
-        mScrollLayout.setToOpen();
+        save.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sign:
-                SignaturActivity.action2SignaturActivity(this);
+                SignaturActivity.action2SignaturActivityForResult(this,mStudentInfo.studentName+mCourseInfo.course_name);
+                break;
+                case R.id.save:
+                    ConsumeClassTimeInfo info = new ConsumeClassTimeInfo();
+                    info.course_class_hour = class_time.getText().toString();
+                    info.course_name = mCourseInfo.course_name;
+                    info.date = date.getText().toString();
+                    info.time = date.getText().toString();
+                    info.memo =memo.getText().toString() ;
+                    info.phone_number = mStudentInfo.studentPhonenumber;
+                    info.photo = path;
+                    info.student_name = mStudentInfo.studentName;
+                    info.teacher = mCourseInfo.teacher;
+                    info.student_id = Integer.valueOf(mStudentInfo.id);
+                    info.course_id =  Integer.valueOf(mCourseInfo.id);
+                    DbOperator.getInstance().insertConsumeClassTimeInfo(info);
                 break;
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_writeinfo, menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 
@@ -232,11 +191,16 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                 this.finish(); // back button
                 return true;
             case R.id.save:
-//                save();
+                CourseUsedDetailActivity.action2CourseUsedDetailActivity(this,mCourseInfo.id,mStudentInfo.studentName+mCourseInfo.course_name);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        path = data.getStringExtra("path");
+        sign_img.setBackground(new BitmapDrawable(path));
+    }
 }

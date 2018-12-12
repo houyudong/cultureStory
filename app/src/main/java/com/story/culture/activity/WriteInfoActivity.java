@@ -46,7 +46,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
+/**
+ * @Description:学员信息录入
+ * @Copyright  2018 中金慈云健康科技有限公司
+ * @Created by 侯玉东 on 2018/12/12 0012 上午 10:09
+ */
 public class WriteInfoActivity extends BaseActivity implements View.OnClickListener, OnRefreshListener {
     private WheelView wvYear;
     private WheelView wvMonth;

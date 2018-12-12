@@ -35,24 +35,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="7dp"
-                android:layout_marginTop="20dp">
+                android:focusable="true">
 
                 <com.story.culture.views.RoundAngleImageView
-                                 android:id="@+id/bg"
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-                                 android:scaleType="centerCrop"
-                                 app:roundHeight1="6dp"
-                                 app:roundWidth1="6dp" />
+                    android:id="@+id/bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    app:roundHeight1="6dp"
+                    app:roundWidth1="6dp" />
 
-      <!--         <com.story.culture.views.RoundAngleImageView
-                         android:id="@+id/bg1"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:background="#88000000"
-                         app:roundHeight1="6dp"
-                         app:roundWidth1="6dp" />-->
+                <!--         <com.story.culture.views.RoundAngleImageView
+                                   android:id="@+id/bg1"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:background="#88000000"
+                                   app:roundHeight1="6dp"
+                                   app:roundWidth1="6dp" />-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -75,22 +76,20 @@
                         android:id="@+id/teacher_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/course_name"
                         android:layout_below="@id/course_name"
+                        android:layout_alignLeft="@id/course_name"
                         android:layout_marginTop="3dp"
                         android:text="授课老师：杨夏洁"
                         android:textColor="#ffffffff"
                         android:textSize="13dp" />
 
 
-
-
                     <TextView
                         android:id="@+id/course_sale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/course_name"
                         android:layout_below="@id/teacher_name"
+                        android:layout_alignLeft="@id/course_name"
                         android:layout_marginTop="2dp"
                         android:text="课程金额优惠价格 210"
                         android:textColor="#ffffffff"
@@ -100,8 +99,8 @@
                         android:id="@+id/course_actual_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/course_name"
                         android:layout_below="@id/course_sale"
+                        android:layout_alignLeft="@id/course_name"
                         android:layout_marginTop="2dp"
                         android:text="课程金额实际支付价格"
                         android:textColor="#ffffffff"
@@ -111,8 +110,8 @@
                         android:id="@+id/course_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/course_name"
                         android:layout_below="@id/course_actual_price"
+                        android:layout_alignLeft="@id/course_name"
                         android:layout_marginTop="2dp"
                         android:text="课程金额原价"
                         android:textColor="#ffffffff"
@@ -128,12 +127,13 @@
                         android:text="包半年"
                         android:textColor="#ffffffff"
                         android:textSize="13dp" />
+
                     <TextView
                         android:id="@+id/start_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/course_name"
                         android:layout_below="@id/course_price"
+                        android:layout_alignLeft="@id/course_name"
                         android:layout_marginTop="2dp"
                         android:text="开始时间：2018-10-12"
                         android:textColor="#ffffffff"
@@ -143,8 +143,8 @@
                         android:id="@+id/end_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/course_name"
                         android:layout_below="@id/start_time"
+                        android:layout_alignLeft="@id/course_name"
                         android:layout_marginTop="2dp"
                         android:text="结束时间：2018-10-12"
                         android:textColor="#ffffffff"
@@ -154,8 +154,8 @@
                         android:id="@+id/course_memo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/course_name"
                         android:layout_below="@id/end_time"
+                        android:layout_alignLeft="@id/course_name"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="15dp"
                         android:text="备注"
@@ -168,10 +168,10 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="top|right"
-                    android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
-                    android:visibility="invisible"
-                    android:background="@drawable/drawable_finish" />
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/drawable_finish"
+                    android:visibility="invisible" />
             </FrameLayout>
 
             <LinearLayout
@@ -186,8 +186,8 @@
                     android:layout_width="100dip"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:layout_marginLeft="20dip"
                     android:layout_marginStart="20dip"
+                    android:layout_marginLeft="20dip"
                     android:text="日期"
                     android:textColor="#fff"
                     android:textSize="15dp" />
@@ -208,16 +208,19 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="50dip"   android:layout_marginBottom="1dp"
+                android:layout_height="50dip"
+                android:layout_marginBottom="1dp"
                 android:background="@drawable/selector_person_common"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="100dip"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:layout_marginLeft="20dip"
                     android:layout_marginStart="20dip"
+                    android:layout_marginLeft="20dip"
                     android:text="姓名"
                     android:textColor="#fff"
                     android:textSize="15dp" />
@@ -240,16 +243,19 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="50dip"   android:layout_marginBottom="1dp"
+                android:layout_height="50dip"
+                android:layout_marginBottom="1dp"
                 android:background="@drawable/selector_person_common"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="100dip"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:layout_marginLeft="20dip"
                     android:layout_marginStart="20dip"
+                    android:layout_marginLeft="20dip"
                     android:text="电话"
                     android:textColor="#fff"
                     android:textSize="15dp" />
@@ -272,16 +278,19 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="50dip"   android:layout_marginBottom="1dp"
+                android:layout_height="50dip"
+                android:layout_marginBottom="1dp"
                 android:background="@drawable/selector_person_common"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="100dip"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:layout_marginLeft="20dip"
                     android:layout_marginStart="20dip"
+                    android:layout_marginLeft="20dip"
                     android:text="消费学时"
                     android:textColor="#fff"
                     android:textSize="15dp" />
@@ -303,17 +312,51 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sign"
                 android:layout_width="fill_parent"
-                android:layout_height="50dip"   android:layout_marginBottom="1dp"
+                android:layout_height="50dip"
+                android:layout_marginBottom="1dp"
                 android:background="@drawable/selector_person_common"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="100dip"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:layout_marginLeft="20dip"
                     android:layout_marginStart="20dip"
+                    android:layout_marginLeft="20dip"
+                    android:text="签名"
+                    android:textColor="#fff"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:id="@+id/sign_img"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:paddingRight="20dip" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/selector_person_common"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="20dip"
+                    android:layout_marginLeft="20dip"
                     android:text="备注"
                     android:textColor="#fff"
                     android:textSize="15dp" />
@@ -335,44 +378,24 @@
             </LinearLayout>
 
             <com.flyco.roundview.RoundTextView
-                android:id="@+id/sign"
+                android:id="@+id/save"
                 style="@style/AppTheme.Label"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
+                android:layout_margin="30dp"
                 android:gravity="center"
-                android:text="签    名"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
-                android:textColor="@color/cardview_light_background"
-                app:rv_backgroundColor="@android:color/background_dark"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="保         存"
+                android:textColor="@android:color/white"
+                app:rv_backgroundColor="#444"
                 app:rv_cornerRadius="3dp"
                 app:rv_strokeColor="@color/colorPrimary"
                 app:rv_strokeWidth="@dimen/division_line"
                 app:rv_textPressColor="@android:color/white" />
 
+
         </LinearLayout>
     </ScrollView>
-
-     <com.story.culture.views.middleScrollView.ScrollLayout
-          android:id="@+id/scroll_down_layout"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_below="@id/appbar">
-
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-
-              <com.story.culture.views.middleScrollView.ContentRecyclerView
-                  android:id="@+id/recyclerView"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent" />
-          </LinearLayout>
-      </com.story.culture.views.middleScrollView.ScrollLayout>
 </RelativeLayout>
 
 

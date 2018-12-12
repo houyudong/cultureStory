@@ -3,13 +3,11 @@ package com.story.culture.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,24 +27,22 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 /**
- * @Description: 用户查询
+ * @Description: 重点关注用户查询
  * @Copyright  2018 中金慈云健康科技有限公司
- * @Created by 侯玉东 on 2018/12/12 0012 上午 9:53
+ * @Created by 侯玉东 on 2018/12/12 0012 上午 9:52
  */
-public class SearchActivity extends BaseActivity implements BaseRecyclerViewAdapter.OnItemClickListener {
+public class SearchImportantAttentionActivity extends BaseActivity implements BaseRecyclerViewAdapter.OnItemClickListener {
     private int type = 1;//1是姓名2是电话3是课程，默认是姓名
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     @Bind(R.id.smartRefreshLayout)
     SmartRefreshLayout smartRefreshLayout;
     private StudentInfoAdapter adapter;
-
-    public static void action2SearchActivity(Context context) {
+    public static void action2SearchImportantAttentionActivity(Context context) {
         Intent intent = new Intent();
-        intent.setClass(context, SearchActivity.class);
+        intent.setClass(context, SearchImportantAttentionActivity.class);
         context.startActivity(intent);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,68 +60,23 @@ public class SearchActivity extends BaseActivity implements BaseRecyclerViewAdap
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("学员查询");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ArrayList<StudentInfo> list = DbOperator.getInstance().getAllSutdent();
+        ArrayList<StudentInfo> list = DbOperator.getInstance().getSutdentByAttention();
         adapter.refresh(list);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
-        searchView.setQueryHint("可输入姓名,电话");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                List<StudentInfo> list = new ArrayList<>();
-                switch (type) {
-                    case 1:
-                        list = DbOperator.getInstance().getSutdentByName(query);
-                        break;
-                    case 2:
-                        list = DbOperator.getInstance().getSutdentByPhone(query);
-                        break;
-                    case 3:
-//                        list.add(DbOperator.getInstance().getSutdentById(query));
-                        break;
-                }
-                adapter.refresh(list);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
                 this.finish();
-            case R.id.function_attentiosn:
-                List<StudentInfo> list =  DbOperator.getInstance().getSutdentByAttention();
-                adapter.refresh(list);
-                break;
-            case R.id.function_phone:
-                type = 2;
-                break;
-            case R.id.function_name:
-                type = 1;
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
-
     @Override
     public void onItemClick(View view, int position) {
         PersonCenterActivity.action2PersonCenterActivity(this, adapter.getItem(position).id);

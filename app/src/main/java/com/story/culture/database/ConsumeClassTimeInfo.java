@@ -9,6 +9,7 @@ public class ConsumeClassTimeInfo  {
 
     public int id;
     public int student_id;
+    public int course_id;
     public String student_name;//学生名字
     public String phone_number;//学生电话
     public String course_name;//课程名字

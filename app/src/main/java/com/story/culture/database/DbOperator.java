@@ -44,7 +44,7 @@ public class DbOperator extends DbHelper {
      */
     public ArrayList<StudentInfo> getSutdentByAttention() {
         String tableName = DbHelper.STUDENT_INFO_TABLE;
-        return getStudentInfo("select * from " + tableName + " where attention = '" + true+ "' ");
+        return getStudentInfo("select * from " + tableName + " where attention = '" + 1+ "' ");
     }
 
     /**
@@ -84,7 +84,7 @@ public class DbOperator extends DbHelper {
         ArrayList<StudentInfo> studentInfos = new ArrayList<>();
         ArrayList<StudentInfo> infos = getStudentInfo("select * from " + tableName);
         for (StudentInfo info : infos) {
-            ArrayList<CourseInfo> courseInfos = getCourseById(info.id);
+            ArrayList<CourseInfo> courseInfos = getCourseByStudentId(info.id);
             for (CourseInfo courseInfo : courseInfos) {
                if (isNeedsToBuyCourse(courseInfo)){
                    studentInfos.add(info);
@@ -245,7 +245,7 @@ public class DbOperator extends DbHelper {
      * @param id
      * @return
      */
-    public  ArrayList<CourseInfo> getCourseById(int id) {
+    public  ArrayList<CourseInfo> getCourseByStudentId(int id) {
         String tableName = DbHelper.COURSE_TABLE;
         return getCourseInfo("select * from " + tableName + " where student_id = '" + id+"'");
     }
@@ -257,7 +257,7 @@ public class DbOperator extends DbHelper {
      */
     public  ArrayList<ConsumeClassTimeInfo> getConsumeClassTimeInfoById(int id) {
         String tableName = DbHelper.CONSUME_CLASS_TIME_TABLE;
-        return getConsumeClassTimeInfo("select * from " + tableName + " where id = '" + id+"'");
+        return getConsumeClassTimeInfo("select * from " + tableName + " where course_id = '" + id+"'");
     }
 
 
@@ -330,6 +330,8 @@ public class DbOperator extends DbHelper {
         item.teacher = localCursor.getString(index);
         index = localCursor.getColumnIndex("phone_number");
         item.phone_number = localCursor.getString(index);
+        index = localCursor.getColumnIndex("course_id");
+        item.course_id = localCursor.getInt(index);
         return item;
     }
 
@@ -433,7 +435,7 @@ private static CourseInfo getCourseInfo(Cursor localCursor) {
         String tableName = DbHelper.CONSUME_CLASS_TIME_TABLE;
         try {
             mSQLiteDatabase.beginTransaction();
-            Object[] arrayOfObject2 = new Object[9];
+            Object[] arrayOfObject2 = new Object[11];
             arrayOfObject2[0] = model.course_name;
             arrayOfObject2[1] = model.student_name;
             arrayOfObject2[2] = model.course_class_hour;
@@ -443,9 +445,11 @@ private static CourseInfo getCourseInfo(Cursor localCursor) {
             arrayOfObject2[6] = model.teacher;
             arrayOfObject2[7] = model.phone_number;
             arrayOfObject2[8] = model.student_id;
+            arrayOfObject2[9] = model.course_id;
+            arrayOfObject2[10] = model.memo;
             mSQLiteDatabase.execSQL(
                     "insert into  " + tableName
-                            + "  (course_name,student_name,course_class_hour,photo,time,date,teacher,phone_number,student_id) values (?,?,?,?,?,?,?,?,?)",
+                            + "  (course_name,student_name,course_class_hour,photo,time,date,teacher,phone_number,student_id,course_id,memo) values (?,?,?,?,?,?,?,?,?,?,?)",
                     arrayOfObject2);
             mSQLiteDatabase.setTransactionSuccessful();
         } catch (Exception e) {
@@ -462,7 +466,7 @@ private static CourseInfo getCourseInfo(Cursor localCursor) {
      * @return true 需要续费 false 不需要续费
      */
     public boolean querySutdent(int id) {
-            ArrayList<CourseInfo> courseInfos = getCourseById(id);
+            ArrayList<CourseInfo> courseInfos = getCourseByStudentId(id);
             for (CourseInfo courseInfo : courseInfos) {
                 if (isNeedsToBuyCourse(courseInfo)){
                    return true;

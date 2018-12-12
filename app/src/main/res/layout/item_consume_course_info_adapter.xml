@@ -74,7 +74,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="15dp"
                 android:layout_below="@id/img"
-                android:text="上课时间 2018-10-12 19:30"
+                android:text="备注信息"
                 android:textColor="#e6e6e6"
                 android:textSize="15sp" />
             <TextView
@@ -82,8 +82,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+     android:layout_below="@id/memo"
+                android:paddingBottom="10dp"
                android:layout_alignParentBottom="true"
                 android:layout_marginRight="15dp"
                 android:text="上课时间 2018-10-12 19:30"

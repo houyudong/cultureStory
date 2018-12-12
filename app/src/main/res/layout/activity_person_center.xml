@@ -4,23 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <ImageView
-        android:id="@+id/parallax"
-        android:layout_width="match_parent"
-        android:layout_height="670dp"
-        android:layout_marginTop="-300dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        android:src="@drawable/image_bg"
-        app:layout_collapseMode="parallax" />-->
-
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:minHeight="200dp"
-        android:layout_height="wrap_content"/>
-
+    <!--    <ImageView
+            android:id="@+id/parallax"
+            android:layout_width="match_parent"
+            android:layout_height="670dp"
+            android:layout_marginTop="-300dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_bg"
+            app:layout_collapseMode="parallax" />-->
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
@@ -62,42 +60,59 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="40dp"
                             android:background="#303030"
-                            android:paddingBottom="@dimen/padding_common_v"
                             android:paddingLeft="@dimen/padding_common_h"
+                            android:paddingTop="@dimen/padding_common_v"
                             android:paddingRight="@dimen/padding_common_h"
-                            android:paddingTop="@dimen/padding_common_v">
+                            android:paddingBottom="@dimen/padding_common_v">
 
                             <com.flyco.roundview.RoundTextView
-                                android:id="@+id/attention"
+                                android:id="@+id/pre"
                                 style="@style/AppTheme.Label"
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginTop="0dp"
-                                android:paddingBottom="8dp"
-                                android:paddingLeft="25dp"
-                                android:paddingRight="25dp"
+                                android:paddingLeft="10dp"
                                 android:paddingTop="8dp"
-                                android:text="添加课程"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="8dp"
+                                android:text="快进"
                                 android:textColor="@color/colorPrimary"
                                 app:rv_backgroundColor="@android:color/white"
-                                app:rv_textPressColor="@android:color/white"
                                 app:rv_cornerRadius="3dp"
                                 app:rv_strokeColor="@color/colorPrimary"
-                                app:rv_strokeWidth="@dimen/division_line" />
+                                app:rv_strokeWidth="@dimen/division_line"
+                                app:rv_textPressColor="@android:color/white" />
+                            <com.flyco.roundview.RoundTextView
+                                android:id="@+id/stop"
+                                style="@style/AppTheme.Label"
+                                android:layout_marginTop="0dp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="8dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="8dp"
+                                android:layout_toStartOf="@id/pre"
+                                android:layout_toLeftOf="@id/pre"
+                                android:text="快退"
+                                android:layout_marginRight="@dimen/padding_common"
+                                android:textColor="@color/colorPrimary"
+                                app:rv_backgroundColor="@android:color/white"
+                                app:rv_cornerRadius="3dp"
+                                app:rv_strokeColor="@color/colorPrimary"
+                                app:rv_strokeWidth="@dimen/division_line"
+                                app:rv_textPressColor="@android:color/white" />
 
                             <com.flyco.roundview.RoundTextView
-                                android:id="@+id/detail"
+                                android:id="@+id/play"
                                 style="@style/AppTheme.Label"
-                                android:layout_marginLeft="@dimen/padding_common"
-                                android:layout_marginRight="@dimen/padding_common"
                                 android:layout_marginTop="0dp"
-                                android:layout_toLeftOf="@id/attention"
-                                android:layout_toStartOf="@id/attention"
-                                android:paddingBottom="8dp"
-                                android:paddingLeft="25dp"
-                                android:paddingRight="25dp"
+                                android:layout_marginRight="@dimen/padding_common"
+                                android:layout_toStartOf="@id/stop"
+                                android:layout_toLeftOf="@id/stop"
+                                android:paddingLeft="10dp"
                                 android:paddingTop="8dp"
-                                android:text="详情"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="8dp"
+                                android:text="播放"
                                 android:textColor="@color/colorPrimary"
                                 app:rv_backgroundColor="@android:color/white"
                                 app:rv_cornerRadius="3dp"
@@ -118,8 +133,8 @@
                                 style="@style/AppTheme.Label"
                                 android:layout_below="@id/name"
                                 android:layout_marginTop="@dimen/padding_common"
-                                android:textColor="#fff"
-                                android:text="电话：15236966658 " />
+                                android:text="电话：15236966658 "
+                                android:textColor="#fff" />
 
 
                             <TextView
@@ -137,9 +152,9 @@
                             android:id="@+id/img"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:layout_marginLeft="@dimen/padding_common"
                             android:layout_marginStart="@dimen/padding_common"
-                            android:src="@drawable/image_head"
+                            android:layout_marginLeft="@dimen/padding_common"
+                            android:background="#fff"
                             app:civ_border_color="@android:color/white"
                             app:civ_border_overlay="true"
                             app:civ_border_width="3dp" />
@@ -155,7 +170,6 @@
                             android:shadowDx="2.5"
                             android:shadowDy="2.5"
                             android:shadowRadius="10"
-                            android:text="剩余总课时充足"
                             android:textColor="@android:color/white" />
 
                         <View
@@ -168,10 +182,10 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
-                    android:background="#303030"
                     android:layout_width="match_parent"
-                    android:minHeight="500dp"
-                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+                    android:layout_height="match_parent"
+                    android:background="#303030"
+                    android:minHeight="500dp"></android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
@@ -208,7 +222,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="一醉方休"
                 android:textSize="16sp" />
         </android.support.v7.widget.ButtonBarLayout>
     </android.support.v7.widget.Toolbar>

@@ -79,12 +79,12 @@ public class CourseInfoAdapter extends BaseRecyclerViewAdapter<CourseInfo, BaseR
             }
             viewHoder.getTextView(R.id.name).setText(item.course_name);
             viewHoder.getTextView(R.id.teacher).setText("授课老师：" + item.teacher);
-            viewHoder.getTextView(R.id.pay_price).setText("缴纳学费：" + item.course_actual_price);
+            viewHoder.getTextView(R.id.pay_price).setText("服务类型：" + item.type);
             viewHoder.getTextView(R.id.memo).setText("备注信息： " + item.memo);
 //            if ("按次".equalsIgnoreCase(item.type)) {
 //                viewHoder.getTextView(R.id.time).setText(item.available_class_hour + "/" + item.course_class_hour);
 //            } else {
-            viewHoder.getTextView(R.id.time).setText(item.type);
+//            viewHoder.getTextView(R.id.time).setText(item.type);
 //            }
             if (item.course_state == 0) {
                 viewHoder.getView(R.id.view).setVisibility(View.VISIBLE);

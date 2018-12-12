@@ -8,11 +8,15 @@
         android:title="上传视频"
         app:showAsAction="never" />
     <item
-        android:id="@+id/modify"
-        android:title="上传视频"
+        android:id="@+id/add"
+        android:title="添加课程"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/profile"
+        android:title="我的资料"
         app:showAsAction="never" />
     <item
         android:id="@+id/importExcel"
-        android:title="导出"
+        android:title="导出课程表"
         app:showAsAction="never" />
 </menu>

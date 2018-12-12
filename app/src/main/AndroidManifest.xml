@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".activity.SignaturActivity" />
         <activity android:name=".activity.SearchNeedsToBuyActivity"></activity>
+        <activity android:name=".activity.SearchImportantAttentionActivity"></activity>
+        <activity android:name=".activity.CourseUsedDetailActivity"></activity>
     </application>
 
 </manifest>

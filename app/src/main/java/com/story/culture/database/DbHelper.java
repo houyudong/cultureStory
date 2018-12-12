@@ -30,8 +30,8 @@ public class DbHelper extends SQLiteHelper {
         sql_create_consume_class_time_table.append("create table if not exists ");
         sql_create_consume_class_time_table.append(CONSUME_CLASS_TIME_TABLE);
         sql_create_consume_class_time_table
-                .append(" (id integer primary key autoincrement ,student_name text,phone_number text,course_name text,course_class_hour text, " +
-                        "time text, photo text,date text, teacher text )");
+                .append(" (id integer primary key autoincrement ,course_id integer,student_name text,student_id integer,phone_number text,course_name text,course_class_hour text, " +
+                        "time text, photo text,date text, teacher text, memo text  )");
 
 
         StringBuffer sql_create_student_info_table = new StringBuffer();
@@ -39,7 +39,7 @@ public class DbHelper extends SQLiteHelper {
         sql_create_student_info_table.append(STUDENT_INFO_TABLE);
         sql_create_student_info_table
                 .append(" (id integer primary key autoincrement ,student_name text,student_phonenumber text,recommend_people text, qq_number text, wechat_number text, " +
-                        "birthday text,start_date text, photo text, vedio text, attention integer,source text, sex integer )");
+                        "birthday text,start_date text, photo text, vedio text, attention boolean,source text, sex integer )");
 
         StringBuffer sql_create_course_table = new StringBuffer();
         sql_create_course_table.append("create table if not exists ");

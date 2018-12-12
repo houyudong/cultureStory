@@ -34,8 +34,8 @@ public class UseCourseInfoAdapter extends BaseRecyclerViewAdapter<ConsumeClassTi
     @Override
     public int getItemCount() {
         if (mDatas == null || mDatas.size() <= 0)
-            return 20;
-        return mDatas.size()+20;
+            return 0;
+        return mDatas.size();
     }
 
     @Override
@@ -53,7 +53,10 @@ public class UseCourseInfoAdapter extends BaseRecyclerViewAdapter<ConsumeClassTi
     protected void convert(BaseRecyclerViewViewHolder viewHoder, final ConsumeClassTimeInfo item, int position) {
         if(item != null ){
 //            viewHoder.getImageView(R.id.img).setBackground(new BitmapDrawable(new Bitmap()));
-            ImageLoader.getInstance().displayImage(item.photo, viewHoder.getImageView(R.id.img));
+//            ImageLoader.getInstance().displayImage(item.photo, viewHoder.getImageView(R.id.img));
+            if(!TextUtils.isEmpty(item.photo)){
+                viewHoder.getImageView(R.id.img) .setBackground(new BitmapDrawable(item.photo));
+            }
             viewHoder.getTextView(R.id.name).setText(item.course_name);
             viewHoder.getTextView(R.id.teacher).setText("授课老师："+item.teacher);
             viewHoder.getTextView(R.id.class_time).setText("消耗学时："+item.course_class_hour);

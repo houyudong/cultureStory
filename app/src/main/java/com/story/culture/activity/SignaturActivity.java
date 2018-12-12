@@ -18,6 +18,8 @@ import com.story.culture.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class SignaturActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,9 +27,11 @@ public class SignaturActivity extends AppCompatActivity implements View.OnClickL
     RoundTextView save;
     RoundTextView del;
     private static final String SD_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/story/";
-    public static void action2SignaturActivity(Activity c) {
+private String name;
+    public static void action2SignaturActivityForResult(Activity c, String s) {
         Intent intent = new Intent(c, SignaturActivity.class);
-        c.startActivityForResult(intent,200);
+        intent.putExtra("name", s);
+        c.startActivityForResult(intent, 200);
     }
 
     @Override
@@ -39,6 +43,10 @@ public class SignaturActivity extends AppCompatActivity implements View.OnClickL
         del = findViewById(R.id.del);
         del.setOnClickListener(this);
         save.setOnClickListener(this);
+        Intent intent = getIntent();
+        if(intent!=null){
+            name = intent.getStringExtra("name");
+        }
         init();
     }
 
@@ -51,11 +59,11 @@ public class SignaturActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.save:
                 Bitmap bitmap = mSignaturePad.getSignatureBitmap();
-               String path = saveImageToLocal(this,bitmap);
-               Intent data = new Intent();
-               data.putExtra("path",path);
-               setResult(100,data);
-               finish();
+                String path = saveImageToLocal(this, bitmap);
+                Intent data = new Intent();
+                data.putExtra("path", path);
+                setResult(100, data);
+                finish();
                 break;
             case R.id.del:
                 mSignaturePad.clear();
@@ -64,16 +72,15 @@ public class SignaturActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
-
-    public static String saveImageToLocal(Context context, Bitmap bmp){
+    public  String saveImageToLocal(Context context, Bitmap bmp) {
         // 首先保存图片
-        String storePath = Environment.getExternalStorageDirectory().getAbsolutePath() +  "story";
+        String storePath = SD_PATH +name;
         File appDir = new File(storePath);
         if (!appDir.exists()) {
             appDir.mkdir();
         }
-        String fileName = System.currentTimeMillis() + ".jpg";
+        SimpleDateFormat df = new SimpleDateFormat("'IMG'_yyyy-MM-dd_HH:mm:ss");
+        String fileName =  df.format(new Date())+ ".jpg";
         File file = new File(appDir, fileName);
         try {
             FileOutputStream fos = new FileOutputStream(file);
@@ -101,6 +108,7 @@ public class SignaturActivity extends AppCompatActivity implements View.OnClickL
     private static String generateFileName() {
         return UUID.randomUUID().toString();
     }
+
     /**
      * 保存bitmap到本地
      *

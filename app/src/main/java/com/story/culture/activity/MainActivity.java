@@ -61,21 +61,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 String[] titles = new String[]{"id", "学生姓名", "性别", "联系方式", "QQ", "微信", "生日", "渠道", "推荐人", "入学时间", "重点关注"};// 设置列中文名
                 int columnLength[] = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};// 设置列宽
                 String fileds[] = new String[]{"id", "studentName", "sex", "studentPhonenumber", "qqNumber", "wechatNumber", "birthday", "source", "recommendPeople", "startDate", "attention"};// 设置列英文名
-                Excel1Util.writeExcel("ceshi.xls", list, titles, columnLength, fileds);
+                Excel1Util.writeExcel("学员列表.xls", list, titles, columnLength, fileds);
 
 
 
                 //学员课程消费记录导出
-                List<ConsumeClassTimeInfo> consumeClassTimeInfos =  DbOperator.getInstance().getConsumeClassTimeInfoById(1);
-                String[] consumeClassTimeInfoTitles = new String[]{"id", "学生名字", "学生电话", "课程名字", "消费学时", "日期", "时间", "授课老师", "备注"};// 设置列中文名
-                int consumeClassTimeInfoColumnLength[] = {10, 10, 10, 10, 10, 10, 10, 10, 10};// 设置列宽
-                String consumeClassTimeInfoFileds[] = new String[]{"id", "student_name", "phone_number", "course_name", "course_class_hour", "date", "time", "teacher",  "memo"};// 设置列英文名
-                Excel1Util.writeExcel("ceshi.xls", consumeClassTimeInfos, consumeClassTimeInfoTitles, consumeClassTimeInfoColumnLength, consumeClassTimeInfoFileds);
+//                List<ConsumeClassTimeInfo> consumeClassTimeInfos =  DbOperator.getInstance().getConsumeClassTimeInfoById(1);
+//                String[] consumeClassTimeInfoTitles = new String[]{"id", "学生名字", "学生电话", "课程名字", "消费学时", "日期", "时间", "授课老师", "备注"};// 设置列中文名
+//                int consumeClassTimeInfoColumnLength[] = {10, 10, 10, 10, 10, 10, 10, 10, 10};// 设置列宽
+//                String consumeClassTimeInfoFileds[] = new String[]{"id", "student_name", "phone_number", "course_name", "course_class_hour", "date", "time", "teacher",  "memo"};// 设置列英文名
+//                Excel1Util.writeExcel("ceshi.xls", consumeClassTimeInfos, consumeClassTimeInfoTitles, consumeClassTimeInfoColumnLength, consumeClassTimeInfoFileds);
                 break;
-            case R.id.pay_price:
+            case R.id.pay_price://续费查询
+                SearchNeedsToBuyActivity.action2SearchNeedsToBuyActivity(this);
                 break;
-            case R.id.attention:
-SearchNeedsToBuyActivity.action2SearchNeedsToBuyActivity(this);
+            case R.id.attention://重点关注学员查询
+                SearchImportantAttentionActivity.action2SearchImportantAttentionActivity(this);
                 break;
             case R.id.query:
                 SearchActivity.action2SearchActivity(this);
